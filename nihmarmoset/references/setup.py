@@ -19,7 +19,6 @@ setup(
         'python-dotenv',
         'scikit_learn',
         'scipy',
-        'seaborn',
-        'ffmpeg-python'
+        'seaborn'
     ],
 )

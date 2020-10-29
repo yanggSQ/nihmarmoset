@@ -1,7 +1,66 @@
-nihmarmoset
+# nihmarmoset - Data Science Repo for NIH Marmoset Project
 ==============================
 
-Marmoset Project Data Processing
+## Quickstart
+
+First follow setup according to the desired system.  Of particular note, make sure that your `.env` file is set to 
+reflect the file-paths on your system.  For example, on his laptop, John has his set to:
+```
+# Environment variables go here, can be read by `python-dotenv` package:
+#
+#   ----------------------------------------------------------------
+#    from dotenv import find_dotenv, load_dotenv
+#
+#    load_dotenv(find_dotenv())
+#   ----------------------------------------------------------------
+#
+# DO NOT ADD THIS FILE TO VERSION CONTROL!
+CONTAINER=cdean1/mindpy:0.1
+PROJECT_ROOT=/Users/fisher/projects/NIH/git/nihmarmoset
+PROJECT_DATA=/Volumes/JWFExtDat/data/marmoset/data
+PROJECT_MODELS=/Volumes/JWFExtDat/data/marmoset/models
+PYTHONPATH=/usr/local/lib:./:/Users/fisher/projects/NIH/git/nihmarmoset/src
+PYTHONUBUFFERED=1
+# Pass the timezone to tzdata on the container to match the host.  Set it to the
+# value returned by `ls -la /etc/localtime | cut -d/ -f8-9` on the host.
+TZ=America/New_York
+```
+## Setup Instructions
+
+Note that these are not complete. I am providing the `venv` setup approach, but others use Anaconda, docker, etc. This 
+will need updating.
+
+### VENV Setup (local)
+
+Assumes that you have *already* cloned the repo. The example commands follow John's local setup (i.e. your directories 
+are probably different)
+
+1. Navigate to the directory where you cloned the repo
+
+   ```
+   cd ~/projects/NIH/git/nihmarmoset
+   ```
+
+2. Create a `venv` environment (see [python venv](https://docs.python.org/3/library/venv.html) for more information.)
+
+   ```
+   python -m venv venv
+   ```
+
+   This will create a subdirectory name `venv` in your git repo. Tools like `pycharm` will automatically detect `venv` 
+environments and activate them automatically. If you are using a different IDE, you may need to activate manually. Note
+that you can change the name of the subdirectory, *but* you will have to add it to `.gitignore` so that it does not get
+tracked by git (which would result in cluttering everyone else's copy of the repo).
+
+3. With the `venv` environment active, install the project requirements:
+    ```
+    pip install -r requirements.txt
+    pip install -e .
+    ```
+   Older instructions included `pip install -r requirements.txt`, but if required packages are listed in `setup.py` then
+   `pip install -e .` it isn't necessary. There is an open question on how to manage package dependencies since the list
+   of required packages will evolve as code is developed and there are *better* ways to detect which packages are being
+   loaded by code within the repo.
 
 Project Organization
 ------------
